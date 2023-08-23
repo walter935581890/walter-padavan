@@ -105,17 +105,18 @@ jobs:
         ################################################################################################
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
         ################################################################################################
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SRELAY=n/CONFIG_FIRMWARE_INCLUDE_SRELAY=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ADBYBY=n/CONFIG_FIRMWARE_INCLUDE_ADBYBY=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_DDNSTO=n/CONFIG_FIRMWARE_INCLUDE_DDNSTO=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n/CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SRELAY=y/CONFIG_FIRMWARE_INCLUDE_SRELAY=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ADBYBY=y/CONFIG_FIRMWARE_INCLUDE_ADBYBY=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_DDNSTO=y/CONFIG_FIRMWARE_INCLUDE_DDNSTO=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y/CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n/g' .config
         
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
@@ -160,6 +161,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #内网穿透NPS
@@ -167,9 +169,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=y" >> .config #ddnsto ~0.5M
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config  #阿里云盘  ~3m
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n" >> .config  #阿里云盘  ~3m
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
         fi
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
