@@ -50,7 +50,7 @@ on:
         - 'XY-C1'
         - 'ZTE-E8820S'
         - 'WE410443-TC'
-        default: 'K2P'
+        default: 'B70'
       target2:
         type: choice
         description: 'Please select the model to compile'
