@@ -7,7 +7,7 @@ on:
 #    - "*"
   workflow_dispatch:
     inputs:
-      target:
+      target1:
         type: choice
         description: 'Please select the model to compile'
         options:
@@ -51,6 +51,13 @@ on:
         - 'ZTE-E8820S'
         - 'WE410443-TC'
         default: 'K2P'
+      target2:
+        type: choice
+        description: 'Please select the model to compile'
+        options:
+        - '4.4'
+        - '3.4'
+        default: '4.4'
       release:
         type: boolean
         description: 'upload to release'
@@ -73,7 +80,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       env:
-        KERNEL: 4.4
+        KERNEL: ${{ inputs.target2 }}
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/xiaowansm5/Padavan-KVR.git /opt/rt-n56u
@@ -85,8 +92,8 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: ${{ inputs.target }}
-        KERNEL: 4.4
+        TNAME: ${{ inputs.target1 }}
+        KERNEL: ${{ inputs.target2 }}
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
