@@ -33,6 +33,7 @@ on:
         - 'MI-R3P-SPI'
         - 'MI-R3P'
         - 'MI-R4A'
+        - 'MI-MINI'
         - 'MR2600'
         - 'MSG1500'
         - 'MSG1500-Z'
