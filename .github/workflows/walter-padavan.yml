@@ -114,6 +114,9 @@ jobs:
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SRELAY=y/CONFIG_FIRMWARE_INCLUDE_SRELAY=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_wireguard=y/CONFIG_FIRMWARE_INCLUDE_wireguard=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ADBYBY=y/CONFIG_FIRMWARE_INCLUDE_ADBYBY=n/g' .config
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n/g' .config
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
@@ -147,7 +150,7 @@ jobs:
         echo 'CONFIG_FIRMWARE_MT7621_OC="0x312"' >> .config #此处填写对应频率的十六进制：1000Mhz=0x312 1100Mhz=0x362 1120Mhz=0x372 1200Mhz=0x3B2
         
         ##aliyundrive-webdav##
-        echo "CONFIG_FIRMWARE_INCLUDE_aliyundrive-webdav=n" >> .config #aliyundrive-webdav
+        echo "CONFIG_FIRMWARE_INCLUDE_aliyundrive-webdav=y" >> .config #aliyundrive-webdav
         
         #网易云解锁##
         echo "CONFIG_FIRMWARE_INCLUDE_UNBLOCKMUSIC=n" >> .config #网易云解锁
