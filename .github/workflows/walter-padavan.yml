@@ -88,6 +88,7 @@ jobs:
         git clone --depth=1 https://github.com/walter935581890/padavan-vb1980-4.4.git /opt/rt-n56u
         #git clone --depth=1 https://github.com/xiaowansm5/padavan-4.4.git /opt/rt-n56u
         #git clone --depth=1 https://github.com/vb1980/padavan-4.4.git /opt/rt-n56u
+        #git clone --depth=1 https://github.com/TurBoTse/padavan.git /opt/rt-n56u
         else
         #换源
         git clone --depth=1 https://github.com/walter935581890/Padavan-3.4.git /opt/rt-n56u
