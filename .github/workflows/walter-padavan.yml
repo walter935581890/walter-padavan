@@ -84,7 +84,8 @@ jobs:
         KERNEL: ${{ inputs.target2 }}
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/walter935581890/padavan-4.4.git /opt/rt-n56u
+        #git clone --depth=1 https://github.com/walter935581890/padavan-4.4.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/walter935581890/Padavan-4.4-KVR.git /opt/rt-n56u
         #git clone --depth=1 https://github.com/xiaowansm5/padavan-4.4.git /opt/rt-n56u
         #git clone --depth=1 https://github.com/vb1980/padavan-4.4.git /opt/rt-n56u
         else
