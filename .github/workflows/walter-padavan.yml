@@ -12,6 +12,7 @@ on:
         description: 'Please select the model to compile'
         options:
         - 'B70'
+        - 'HC5661A'
         - 'BELL-A040WQ'
         - 'CR660x'
         - 'DIR-878'
