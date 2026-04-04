@@ -1,3 +1,4 @@
+
 #修改TNAME: K2P 中的K2P为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: walter-padavan
 
@@ -12,7 +13,6 @@ on:
         description: 'Please select the model to compile'
         options:
         - 'B70'
-        - 'HC5661A'
         - 'BELL-A040WQ'
         - 'CR660x'
         - 'DIR-878'
@@ -67,7 +67,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Checkout
@@ -86,8 +86,8 @@ jobs:
       run: |
         if [ $KERNEL = "4.4" ] ; then
         #git clone --depth=1 https://github.com/walter935581890/padavan-4.4.git /opt/rt-n56u
-        git clone --depth=1 https://github.com/xiaowansm5/padavan-4.4.git /opt/rt-n56u
-        #git clone --depth=1 https://github.com/walter935581890/padavan-4.4.git /opt/rt-n56u
+        #git clone --depth=1 https://github.com/xiaowansm5/padavan-4.4.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
         else
         #换源
         git clone --depth=1 https://github.com/walter935581890/Padavan-3.4.git /opt/rt-n56u
@@ -149,8 +149,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=n" >> .config #SQM QOS#CPU超频
         echo "CONFIG_FIRMWARE_INCLUDE_OC=n" >> .config #CPU超频开关
         echo 'CONFIG_FIRMWARE_MT7621_OC="0x312"' >> .config #此处填写对应频率的十六进制：1000Mhz=0x312 1100Mhz=0x362 1120Mhz=0x372 1200Mhz=0x3B2
-
-
         
         else
         
@@ -184,7 +182,6 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
-
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
