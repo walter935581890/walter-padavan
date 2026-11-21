@@ -67,19 +67,30 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo apt-get update
+        # runner 镜像自带 microsoft-prod / azure-cli 这些源，早就 404，
+        # 会让 apt-get update 返回 100 直接把 job 打断（这次失败的 exit 100 就是它）
+        sudo rm -f /etc/apt/sources.list.d/azure-cli.list \
+                   /etc/apt/sources.list.d/microsoft-prod.list \
+                   /etc/apt/sources.list.d/packages.microsoft.com.list
+        sudo apt-get update -o Acquire::Retries=3 || echo "::warning::apt-get update 失败，继续"
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
-        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+          cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+          pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
+          || echo "::warning::apt 安装不完整，继续（下面的自检会说明到底缺什么）"
+        echo "---- 必备工具自检 ----"
+        for c in make gcc g++ cpio python3 git curl tar awk sed xz ; do
+          printf '%-8s %s\n' "$c" "$(command -v $c || echo MISSING)"
+        done
+        command -v fakeroot >/dev/null || sudo apt-get -y install fakeroot || true
     - name: Clone source code
       env:
         KERNEL: ${{ inputs.target2 }}
@@ -201,8 +212,10 @@ jobs:
         done
 
     - name : Upload packages
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: Padavan-packages
-        path: /opt/images
+        path: |
+          /opt/images
+          /opt/rt-n56u/trunk/build.log
