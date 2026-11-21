@@ -107,7 +107,7 @@ jobs:
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Inject pgyvpn (蒲公英 VPN)
-      if: ${{ inputs.target2 == '4.4' }}
+      #if: ${{ inputs.target2 == '4.4' }}
       run: |
         tar -xzf "$GITHUB_WORKSPACE/pgyvpn-ci.tar.gz" -C /tmp
         sh /tmp/pgyvpn_ci/apply.sh /opt/rt-n56u
