@@ -86,9 +86,10 @@ jobs:
           cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
           pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
           || echo "::warning::apt 安装不完整，继续（下面的自检会说明到底缺什么）"
+        sudo apt-get -y install gettext gettext-base || true
         echo "---- 必备工具自检 ----"
-        for c in make gcc g++ cpio python3 git curl tar awk sed xz ; do
-          printf '%-8s %s\n' "$c" "$(command -v $c || echo MISSING)"
+        for c in make gcc g++ cpio python3 git curl tar awk sed xz msgfmt msginit autopoint libtoolize ; do
+          printf '%-10s %s\n' "$c" "$(command -v $c || echo MISSING)"
         done
         command -v fakeroot >/dev/null || sudo apt-get -y install fakeroot || true
     - name: Clone source code
@@ -114,6 +115,11 @@ jobs:
         grep -n "CONFIG_FIRMWARE_INCLUDE_PGYVPN" /opt/rt-n56u/trunk/user/Makefile
         grep -c "蒲公英" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/state.js
         du -sh /opt/rt-n56u/trunk/user/pgyvpn
+        echo "==== 关掉 xz 的翻译(NLS)，规避 gettext 不全时的 po 编译失败 ===="
+        MK=/opt/rt-n56u/trunk/tools/mksquashfs_xz/Makefile
+        grep -q -- '--disable-nls' $MK || sed -i 's|--disable-lzmainfo|--disable-lzmainfo --disable-nls|' $MK
+        rm -f /opt/rt-n56u/trunk/tools/mksquashfs_xz/config_xz_done
+        grep -n -- '--disable-nls' $MK
 
     - name: Build Firmware
       env:
