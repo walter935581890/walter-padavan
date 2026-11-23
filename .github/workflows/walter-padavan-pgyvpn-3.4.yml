@@ -27,6 +27,7 @@ on:
         - 'DIR-878'
         - 'DIR-882'
         - 'E8820V2'
+        - 'HC5661'
         - 'HC5661A'
         - 'HC5761A'
         - 'HC5861B'
@@ -75,7 +76,7 @@ on:
       plugins:
         type: string
         description: '要集成的插件，逗号分隔，留空=不集成；可用见文件顶部注释'
-        default: 'adbyby,zerotier,wireguard'
+        default: 'adbyby,zerotier'
       enable_pgyvpn:
         type: boolean
         description: '集成蒲公英(pgyvpn)插件'
