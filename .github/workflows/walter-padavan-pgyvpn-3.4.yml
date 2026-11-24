@@ -112,7 +112,8 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/walter935581890/Padavan-3.4.git /opt/rt-n56u
+        # git clone --depth=1 https://github.com/walter935581890/Padavan-3.4.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/walter935581890/padavan-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
